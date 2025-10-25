@@ -17,11 +17,14 @@ A* works just like that! For every possible step it can take, it calculates a sc
 
 The score is calculated with a simple formula:
 
+```
 f(n) = g(n) + h(n)
+```
 Where:
-n is the next possible square (or "node") on the path.
-g(n) is the actual cost of the path from the start to this square n. (Think of it as the distance you've already traveled).
-h(n) is the heuristic or estimated cost from the square n to the goal. (This is our "smart guess" of the remaining distance).
+- `n` is the next possible square (or "node") on the path.
+- `g(n)` is the actual cost of the path from the start to this square `n`. (Think of it as the distance you've already traveled).
+- `h(n)` is the heuristic or estimated cost from the square `n` to the goal. (This is our "smart guess" of the remaining distance).
+
 The magic of A* lies in the h(n) part—the heuristic. Let's look at what makes a heuristic good or bad.
 
 **The Brain of A*: Understanding Heuristics**
@@ -29,19 +32,31 @@ The magic of A* lies in the h(n) part—the heuristic. Let's look at what makes 
 A heuristic is just a function that helps A* make smart decisions. But for A* to work perfectly, its heuristic must follow two important rules.
 
 **1. Admissible Heuristic (The Optimist )**
-An admissible heuristic is always optimistic. It never overestimates the actual cost to get to the goal.
+An admissible heuristic is always optimistic. It **never overestimates** the actual cost to get to the goal. This property is crucial because it guarantees that A* will find the shortest path.
 
 The Rule: The guessed cost must be less than or equal to the real cost.
+```
 h(n) ≤ true_cost(n)
+```
 
 Think of it this way: If the goal is 10 steps away, an admissible heuristic might guess it's 8 steps away, or 10, but it will never guess it's 11 steps away. This optimism is key to finding the shortest path.
 
 **2. Consistent Heuristic (The Logical Guide )**
 A consistent heuristic follows the "triangle inequality." It means that as you move from one square to a neighbor, the heuristic cost shouldn't drop by more than the cost of that single step.
 
-The Rule: h(current) ≤ cost(current, neighbor) + h(neighbor)
+The Rule: For any node `current` and its neighbor `neighbor`:
+```
+h(current) ≤ cost(current, neighbor) + h(neighbor)
+```
 
 This makes the search logical and efficient. It prevents the algorithm from getting confused by wild jumps in its own estimates.
 
+> **Note:** A consistent heuristic is always admissible. However, an admissible heuristic is not always consistent.
+
 **How to Run This Project**
 This project is in a Jupyter Notebook (A_Star_Experiments.ipynb). It's easy to run!
+
+1.  Make sure you have Jupyter Notebook installed.
+2.  Open a terminal or command prompt.
+3.  Navigate to the project directory.
+4.  Run the command: `jupyter notebook A_Star_Experiments.ipynb`
